@@ -1,0 +1,109 @@
+import { createSlice } from "@reduxjs/toolkit";
+import { addNewPost, getAllPosts, deletePost, editPost, getCurrentPost, likeOrDislikePost, } from "../../AsyncThunk/PostService/PostService";
+
+const initialState = {
+  postList: [],
+  singlePost: null,
+  postStatus: "idle",
+};
+
+const postSlice = createSlice({
+  name: "posts",
+  initialState,
+  reducers: {
+    addPost: (state, action) => {
+      state.postList = action.payload;
+    },
+  },
+  extraReducers: {
+    [getAllPosts.pending.toString()]: (state) => {
+      console.log("Pending")
+      state.postStatus = "loading";
+    },
+
+    [getAllPosts.fulfilled.toString()]: (state, action) => {
+      const { posts } = action.payload;
+      console.log(posts)
+      state.postList = posts;
+      state.postStatus = "success";
+    },
+
+    [getAllPosts.rejected.toString()]: (state) => {
+      console.log("Failed")
+      state.postStatus = "failed";
+    },
+
+    [getCurrentPost.pending.toString()]: (state) => {
+      state.postStatus = "loading";
+    },
+
+    [getCurrentPost.fulfilled.toString()]: (state, action) => {
+      const {post} = action.payload;
+      state.singlePost = post;
+      state.postStatus = "success";
+    },
+
+    [getCurrentPost.rejected.toString()]: (state) => {
+      state.postStatus = "failed";
+    },
+
+    [addNewPost.pending.toString()]: (state) => {
+      state.postStatus = "loading";
+    },
+
+    [addNewPost.fulfilled.toString()]: (state, action) => {
+      const { posts } = action.payload;
+      state.postList = posts;
+      state.postStatus = "success";
+    },
+
+    [addNewPost.rejected.toString()]: (state) => {
+      state.postStatus = "failed";
+    },
+
+    [likeOrDislikePost.pending.toString()]: (state) => {
+      state.postStatus = "loading";
+    },
+
+    [likeOrDislikePost.fulfilled.toString()]: (state, action) => {
+      const { posts } = action.payload;
+      state.postList = posts;
+      state.postStatus = "success";
+    },
+
+    [likeOrDislikePost.rejected.toString()]: (state) => {
+      state.postStatus = "failed";
+    },
+
+    [deletePost.pending.toString()]: (state) => {
+      state.postStatus = "loading";
+    },
+
+    [deletePost.fulfilled.toString()]: (state, action) => {
+      const { posts } = action.payload;
+      state.postList = posts;
+      state.postStatus = "success";
+    },
+    
+    [deletePost.rejected.toString()]: (state) => {
+      state.postStatus = "failed";
+    },
+
+    [editPost.pending.toString()]: (state) => {
+      state.postStatus = "loading";
+    },
+
+    [editPost.fulfilled.toString()]: (state, action) => {
+      const { posts } = action.payload;
+      state.postList = posts;
+      state.postStatus = "success";
+    },
+    
+    [editPost.rejected.toString()]: (state) => {
+      state.postStatus = "failed";
+    },
+  },
+});
+
+export const { addPost } = postSlice.actions;
+export const postReducer = postSlice.reducer;

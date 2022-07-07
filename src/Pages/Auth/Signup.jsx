@@ -3,7 +3,7 @@ import { Button, Container, FormControl, Heading, Input, InputGroup, InputRightE
 import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { signupUser } from "../../Features/Authentication/AuthServices";
+import { signupUser } from "../../Redux/AsyncThunk/AuthService/AuthServices";
 
 const Signup = () => {
   const [show, setshow] = useState(false);

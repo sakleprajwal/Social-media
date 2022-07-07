@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import { loginUser, signupUser } from "./AuthServices";
+import { signupUser, loginUser } from "../../AsyncThunk/AuthService/AuthServices";
 
 const initialState = {
     authToken: "" || JSON.parse(localStorage.getItem("authToken")),
@@ -14,6 +14,7 @@ const authSlice = createSlice({
         logout: (state) => {
             state.authToken="";
             state.user=null;
+            state.authStatus="idle"
             localStorage.removeItem("authToken");
             localStorage.removeItem("userToken");
         },

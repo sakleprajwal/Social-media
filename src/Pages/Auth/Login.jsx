@@ -3,7 +3,7 @@ import { Button, Container, FormControl, Heading, Input, InputGroup, InputRightE
 import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../Features/Authentication/AuthServices";
+import { loginUser } from "../../Redux/AsyncThunk/AuthService/AuthServices";
 
 const Login = () => {
 	const [show, setshow] = useState(false);
@@ -15,8 +15,8 @@ const Login = () => {
   const authStatus = useSelector(state => state.auth.authStatus)
 
   const testCredentials = {
-    username: "Prajwal123",
-    password: "prajwal"
+    username: "Prajwal",
+    password: "Prajwal"
   }
 
   const loginWithTest = () => {
